@@ -15,10 +15,10 @@ mirrorsnapshot(){
    done
 }
 checktime(){
-    BIRTH_TIME=$(stat $SNAPDIR -c%w)
-    BIRTH_TIMESTAMP=$(stat $SNAPDIR -c%W)
-    TIMEDIFF=`expr $(date +%s) - ${BIRTH_TIMESTAMP}`
-    printf "Last repo sync time: ${BIRTH_TIME},\n"
+    SNAP_TIME=$(stat $SNAPDIR -c%y)
+    SNAP_TIMESTAMP=$(stat $SNAPDIR -c%Y)
+    TIMEDIFF=`expr $(date +%s) - ${SNAP_TIMESTAMP}`
+    printf 'Last repo sync time: %s,\n' "${SNAP_TIME}"
     echo "It has been $(date -ud@$TIMEDIFF +"$(( ${TIMEDIFF}/3600/24 )) days %H hours %M mins")"
 }
 if [ "$1" = "--checktime" ] || [ "$1" = "-c" ];then
