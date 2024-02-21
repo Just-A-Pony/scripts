@@ -19,7 +19,7 @@ checktime(){
     SNAP_TIMESTAMP=$(stat $SNAPDIR -c%Y)
     TIMEDIFF=`expr $(date +%s) - ${SNAP_TIMESTAMP}`
     printf 'Last repo sync time: %s,\n' "${SNAP_TIME}"
-    echo "It has been $(date -ud@$TIMEDIFF +"$(( ${TIMEDIFF}/3600/24 )) days %H hours %M mins")"
+    echo "It has been $(date -ud@$TIMEDIFF +"$(( ${TIMEDIFF}/3600/24 )) days %H hours %M mins since your last update.")"
 }
 if [ "$1" = "--checktime" ] || [ "$1" = "-c" ];then
     checktime;exit 0
