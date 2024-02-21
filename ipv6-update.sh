@@ -1,4 +1,3 @@
-https_proxy='127.0.0.1:10809'
 bearer_auth="flmH9Ies7w7Icj_RMmLlDWxDFZyOn679Bv59NntO"
 domain="sakuya-arch.just-a-pony.net"
 zone_identifier="af577fa47883f7f5c9a950086904764e"
