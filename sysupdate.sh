@@ -1,18 +1,17 @@
 #!/bin/bash
-set -e
 MIRROR_DIR=/media/mirrors
 SNAPDIR=${MIRROR_DIR}-snap
 checkrepos(){
     for repo in "${MIRROR_DIR}"/*;do
-        systemctl show --no-pager "${repo##*/}"-mirror-sync.service|grep 'ActiveState=active' && echo "Mirror is Syncing!" && exit 1
+        systemctl show --no-pager "${repo##*/}"-mirror-sync.service|grep 'ActiveState=active' && echo "Mirror is Syncing!" && exit 1 
     done
 }
 mirrorsnapshot(){
     for repo in "${MIRROR_DIR}"/*;do
        if [ -d "$SNAPDIR"/"${repo##*/}" ];then
-            btrfs subvolume delete "$SNAPDIR"/"${repo##*/}" || echo "Failed To Delete Subvolume" && exit 1
+           btrfs subvolume delete "$SNAPDIR"/"${repo##*/}" || eval $(echo "Failed To Delete Subvolume" && exit 1)
        fi
-       btrfs subvolume snapshot -r "$repo" "$SNAPDIR"/"${repo##*/}" || echo "Failed To Delete Subvolume!" && exit 1
+       btrfs subvolume snapshot -r "$repo" "$SNAPDIR"/"${repo##*/}" || eval $(echo "Failed To Create Subvolume!" && exit 1)
    done
 }
 resumesync(){
